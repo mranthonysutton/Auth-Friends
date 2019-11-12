@@ -36,7 +36,7 @@ const LoginForm = () => {
         const { data } = response;
         sessionStorage.setItem("token", data.payload);
       })
-      .catch(error => console.error(error));
+      .catch(error => console.error("Log In: ", error));
   };
 
   return (
