@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 
 const LoginForm = () => {
@@ -10,23 +10,41 @@ const LoginForm = () => {
     isLoggedIn: false
   });
 
-  const handleLogIn = e => {
-    e.preventDefault();
-    console.log("Credentials: ", loginCredentials);
-  };
+  useEffect(() => {
+    if (sessionStorage.getItem('token')) {
+      setLoginCredentials({...loginCredentials, isLoggedIn: true})
+    } else {
+      setLoginCredentials({...loginCredentials, isLoggedIn: false})
+    }
+  }, []);
 
   const handleChange = e => {
     setLoginCredentials({...loginCredentials, [e.target.name]: e.target.value});
     // console.log(loginCredentials);
   };
 
+  const handleLogIn = e => {
+    e.preventDefault();
+
+    axios.post('http://localhost:5000/api/login', loginCredentials)
+      .then(response => {
+        console.log('RESPONSE: ', response);
+        const {data} = response;
+        sessionStorage.setItem('token', data.payload);
+      })
+      .catch(error => console.error(error))
+  };
+
   return (
     <div className="login-form-container">
-      <input type="text" name="username" placeholder="Username..."
-             onChange={handleChange}/>
-      <input type="text" name="password" placeholder="Password..."
-             onChange={handleChange}/>
-      <button type="submit" onClick={handleLogIn}>Log In</button>
+      <h1>{loginCredentials.isLoggedIn ? 'Logged In' : 'Please Log In'}</h1>
+      <form onSubmit={handleLogIn}>
+        <input type="text" name="username" placeholder="Username..."
+               onChange={handleChange}/>
+        <input type="password" name="password" placeholder="Password..."
+               onChange={handleChange}/>
+        <button type="submit">Log In</button>
+      </form>
     </div>
   );
 }
