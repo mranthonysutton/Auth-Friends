@@ -33,7 +33,7 @@ const AddFriends = props => {
           name="email"
           onChange={props.handleChange}
         />
-        <Button variant="contained" fullWidth color="primary">
+        <Button type="submit" variant="contained" fullWidth color="primary">
           Add Friend
         </Button>
       </form>
