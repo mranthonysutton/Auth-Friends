@@ -35,6 +35,17 @@ const FriendList = () => {
     // console.log(addFriend);
   };
 
+  const deleteFriend = friend => {
+    const idToDelete = friend.friend.id;
+    console.log(idToDelete);
+    AxiosWithAuth()
+      .delete(`api/friends/${idToDelete}`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => console.log(error));
+  };
+
   return (
     <div className="friend-list-container">
       <AddFriends
@@ -55,6 +66,7 @@ const FriendList = () => {
               name={friend.name}
               age={friend.age}
               email={friend.email}
+              deleteFriend={() => deleteFriend({ friend })}
             />
           ))}
         </Box>

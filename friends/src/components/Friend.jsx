@@ -25,7 +25,7 @@ const Friend = props => {
         <Fab color="primary" className={classes.fab}>
           <EditIcon />
         </Fab>
-        <Fab color="secondary">
+        <Fab color="secondary" onClick={props.deleteFriend}>
           <DeleteIcon />
         </Fab>
       </div>
