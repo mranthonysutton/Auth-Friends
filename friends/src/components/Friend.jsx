@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Fab, Card, Typography } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -21,9 +23,11 @@ const Friend = props => {
       <p>{props.email}</p>
       <div className="button-container">
         <Fab color="primary" className={classes.fab}>
-          Edit
+          <EditIcon />
         </Fab>
-        <Fab color="secondary">Delete</Fab>
+        <Fab color="secondary">
+          <DeleteIcon />
+        </Fab>
       </div>
     </Card>
   );
