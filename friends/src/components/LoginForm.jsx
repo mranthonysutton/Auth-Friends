@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AxiosWithAuth from "../utils/AxiosWithAuth";
+import { Button, TextField, Box, Container } from "@material-ui/core";
 
 const LoginForm = () => {
   const [loginCredentials, setLoginCredentials] = useState({
@@ -40,24 +41,39 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="login-form-container">
+    <Box display="flex" flexDirection="column" alignContent="center">
       <h1>{loginCredentials.isLoggedIn ? "Logged In" : "Please Log In"}</h1>
-      <form onSubmit={handleLogIn}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username..."
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password..."
-          onChange={handleChange}
-        />
-        <button type="submit">Log In</button>
-      </form>
-    </div>
+      <Container maxWidth="sm">
+        <form onSubmit={handleLogIn}>
+          <TextField
+            required
+            autoFocus
+            fullWidth
+            label="Username..."
+            margin="normal"
+            variant="outlined"
+            type="text"
+            name="username"
+            placeholder="Username..."
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            fullWidth
+            label="Password..."
+            margin="normal"
+            variant="outlined"
+            type="password"
+            name="password"
+            placeholder="Password..."
+            onChange={handleChange}
+          />
+          <Button fullWidth variant="outlined" color="primary" type="submit">
+            Log In
+          </Button>
+        </form>
+      </Container>
+    </Box>
   );
 };
 

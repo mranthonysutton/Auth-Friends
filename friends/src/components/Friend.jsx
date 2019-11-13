@@ -1,16 +1,31 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Fab, Card, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  fab: {
+    margin: theme.spacing(1)
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1)
+  }
+}));
 
 const Friend = props => {
+  const classes = useStyles();
+
   return (
-    <div className="friend-card">
-      <h3>{props.name}</h3>
+    <Card className="friend-cards">
+      <Typography variant="h3">{props.name}</Typography>
       <p>Age: {props.age}</p>
       <p>{props.email}</p>
       <div className="button-container">
-        <button>Edit</button>
-        <button>Delete</button>
+        <Fab color="primary" className={classes.fab}>
+          Edit
+        </Fab>
+        <Fab color="secondary">Delete</Fab>
       </div>
-    </div>
+    </Card>
   );
 };
 

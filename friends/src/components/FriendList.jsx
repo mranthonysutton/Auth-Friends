@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AxiosWithAuth from "../utils/AxiosWithAuth";
+import { Box, Container } from "@material-ui/core";
 import Friend from "./Friend";
 import AddFriends from "./AddFriends";
 
@@ -41,14 +42,23 @@ const FriendList = () => {
         handleAddFriend={handleAddFriend}
       />
 
-      {friendList.map(friend => (
-        <Friend
-          key={friend.id}
-          name={friend.name}
-          age={friend.age}
-          email={friend.email}
-        />
-      ))}
+      <Container maxWidth="md">
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          alignContent="center"
+          justifyContent="space-around"
+        >
+          {friendList.map(friend => (
+            <Friend
+              key={friend.id}
+              name={friend.name}
+              age={friend.age}
+              email={friend.email}
+            />
+          ))}
+        </Box>
+      </Container>
     </div>
   );
 };
